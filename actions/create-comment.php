@@ -12,5 +12,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../pages/article.php?id=$id");
     }
 } else {
-    header("Location: ../pages/create-comment.php?status=error");
+    header("Location: ../pages/article.php?id=$id&status=comment-error");
 }

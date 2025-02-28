@@ -14,5 +14,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../pages/article.php?id=$id");
     }
 } else {
-    header("Location: ../pages/edit-article.php?status=error");
+    header("Location: ../pages/article.php?id=$id&status=article-error");
 }

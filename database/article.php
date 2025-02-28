@@ -4,13 +4,14 @@ require_once "pdo.php";
 function getArticles($isAll)
 {
     global $pdo;
+
     $sql2 = ";";
 
     if (!$isAll) {
         $sql2 = "LIMIT 5;";
     }
 
-    $sql = "SELECT a.*, c.title as category_title FROM articles a JOIN categories c ON a.category_id = c.id ORDER BY a.created_at DESC " . $sql2;
+    $sql = "SELECT a.* FROM articles a ORDER BY a.created_at DESC " . $sql2;
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute();
@@ -24,18 +25,48 @@ function getArticle($id)
 {
     global $pdo;
 
-    $targetId = $id;
-
     $sql = "SELECT a.*, c.title as category_title FROM articles a JOIN categories c ON a.category_id = c.id WHERE a.id = :id;";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-        ":id" => $targetId,
+        ":id" => $id,
     ]);
 
     $result = $stmt->fetch();
 
     return $result;
+}
+
+function getNumberOfArticles()
+{
+    global $pdo;
+
+    $sql = "SELECT COUNT(*) FROM articles;";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute();
+
+    $results = $stmt->fetchColumn();
+
+    return $results;
+}
+
+function getSomeArticlesByCategories($categoryId, $limit, $offset)
+{
+    global $pdo;
+
+    $sql = "SELECT a.* FROM articles a WHERE a.category_id = :category ORDER BY a.created_at DESC LIMIT :limit OFFSET :offset;";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':category', $categoryId, PDO::PARAM_INT);
+    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $results = $stmt->fetchAll();
+
+    return $results;
 }
 
 function getCategories()

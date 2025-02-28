@@ -5,13 +5,14 @@ $category = getCategories();
 include_once "../components/header.php";
 ?>
 
-<div class="container mt-5">
+<div class="container text-center my-5">
+    <h1>Créer un nouvelle article</h1>
     <?php if (isset($_GET["status"]) && in_array($_GET["status"], (array) "error")): ?>
         <div class="alert alert-danger" role="alert">
             <p>Une erreur est survenue lors de la création de l'article. Veuillez réessayer ultérieurement.</p>
         </div>
     <?php endif; ?>
-    <form action="/actions/create-article.php" method="post">
+    <form action="/actions/create-article.php" method="post" class="mt-5">
         <div class="mb-3">
             <label for="title" class="form-label">Titre de l'article *</label>
             <input name="title" type="text" class="form-control" id="title" required>
