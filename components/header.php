@@ -1,10 +1,16 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
+    <title><?= $title; ?></title>
     <link rel="stylesheet" href="/public/bootstrap/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
@@ -21,6 +27,16 @@
                     <a class="nav-link active" aria-current="page" href="/pages/archives.php?page=1">Archives</a>
                     <a class="btn btn-outline-success" href="/pages/create-article.php">Créer un nouvelle article</a>
                 </div>
+            </div>
+            <div class="navbar-nav">
+                <?php if (isset($_SESSION["user"])): ?>
+                    <a class="nav-link active" aria-current="page" href="#">Bonjour, <?= $_SESSION["user"]["name"]; ?></a>
+                    <a class="btn btn-outline-danger" href="/actions/unlogin.php">Se déconnecter</a>
+                <?php else: ?>
+                    <a class="btn btn-outline-dark" href="/pages/login.php">Se connecter</a>
+                    <a class="btn btn-outline-primary" href="/pages/register.php">Créer un compte</a>
+                <?php endif; ?>
+
             </div>
         </div>
     </nav>

@@ -22,8 +22,6 @@ function createUser($name, $email, $password): bool
 {
     global $pdo;
 
-    $pdo->beginTransaction();
-
     $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password);";
     $stmt = $pdo->prepare($sql);
 
@@ -33,5 +31,5 @@ function createUser($name, $email, $password): bool
         ":password" => $password,
     ]);
 
-    return $pdo->commit();
+    return true;
 }

@@ -87,8 +87,6 @@ function createArticle($title, $content, $image, $category, $username): bool
 {
     global $pdo;
 
-    $pdo->beginTransaction();
-
     $sql = "INSERT INTO articles (title, content, image, category_id, user_id) VALUES (:title, :content, :image, :category, :user);";
     $stmt = $pdo->prepare($sql);
 
@@ -100,14 +98,12 @@ function createArticle($title, $content, $image, $category, $username): bool
         ":user" => $username,
     ]);
 
-    return $pdo->commit();
+    return true;
 }
 
 function editArticle($id, $title, $content, $image, $category, $user): bool
 {
     global $pdo;
-
-    $pdo->beginTransaction();
 
     $sql = "UPDATE articles SET title = :title, content = :content, image = :image, category_id = :category, user_id = :user WHERE id = :id;";
     $stmt = $pdo->prepare($sql);
@@ -121,5 +117,5 @@ function editArticle($id, $title, $content, $image, $category, $user): bool
         ":user" => $user,
     ]);
 
-    return $pdo->commit();
+    return true;
 }

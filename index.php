@@ -7,6 +7,11 @@ include_once "./components/header.php";
 ?>
 
 <div class="container text-center mt-5">
+    <?php if (isset($_GET["status"]) && in_array($_GET["status"], (array) "login-success")): ?>
+        <div class="alert alert-success" role="alert">
+            <p>Connexion à votre compte effectué avec succès.</p>
+        </div>
+    <?php endif; ?>
     <h1>À la une</h1>
     <div id="carouselExampleInterval" class="carousel slide my-5" data-bs-ride="carousel">
         <div class="carousel-inner">

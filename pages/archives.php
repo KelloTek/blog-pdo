@@ -7,7 +7,7 @@ $articlesPerCategories = [];
 $currentPage = intval($_GET["page"]);
 $itemsPerPage = 3;
 $itemsStart =  ($currentPage - 1) * $itemsPerPage;
-$totalPages = ceil($numberOfArticles / $itemsPerPage) / array_key_last($categories);
+$totalPages = intval(ceil(($numberOfArticles / $itemsPerPage) / array_key_last($categories)));
 
 foreach ($categories as $category) {
     $articlesPerCategories[$category["title"]] = getSomeArticlesByCategories($category["id"], $itemsPerPage, $itemsStart);
@@ -44,7 +44,7 @@ include_once "../components/header.php";
                     <?php endif; ?>
                 <?php endfor; ?>
                 <li class="page-item">
-                    <a class="page-link" href="/pages/archives.php?page=<?= $currentPage == $totalPages ? $currentPage : $currentPage + 1; ?>" aria-label="Next">
+                    <a class="page-link" href="/pages/archives.php?page=<?= $currentPage === $totalPages ? $currentPage : $currentPage + 1; ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

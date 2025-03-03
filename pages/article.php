@@ -41,18 +41,6 @@ include_once "../components/header.php";
         <div class="offcanvas-body">
             <form action="/actions/edit-article.php?id=<?= $_GET['id']; ?>" method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Nom d'utilisateur *</label>
-                    <input name="username" type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Addresse Email *</label>
-                    <input name="email" type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-5">
-                    <label for="password" class="form-label">Mot de passe *</label>
-                    <input name="password" type="password" class="form-control" id="password" required>
-                </div>
-                <div class="mb-3">
                     <label for="title" class="form-label">Titre de l'article *</label>
                     <input name="title" type="text" class="form-control" id="title" value="<?= $article["title"]; ?>" required>
                 </div>
@@ -102,18 +90,6 @@ include_once "../components/header.php";
         </div>
         <div class="offcanvas-body">
             <form action="/actions/create-comment.php?id=<?= $_GET['id']; ?>" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Nom d'utilisateur *</label>
-                    <input name="username" type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Addresse Email *</label>
-                    <input name="email" type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-5">
-                    <label for="password" class="form-label">Mot de passe *</label>
-                    <input name="password" type="password" class="form-control" id="password" required>
-                </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Contenu du commentaire *</label>
                     <textarea class="form-control" id="content" name="content" rows="3" required></textarea>

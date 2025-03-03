@@ -32,5 +32,5 @@ function createComment($content, $id, $user): bool
         ":user" => $user,
     ]);
 
-    return $pdo->commit();
+    return true;
 }
