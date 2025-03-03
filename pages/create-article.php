@@ -14,6 +14,18 @@ include_once "../components/header.php";
     <?php endif; ?>
     <form action="/actions/create-article.php" method="post" class="mt-5">
         <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur *</label>
+            <input name="username" type="text" class="form-control" id="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Addresse Email *</label>
+            <input name="email" type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-5">
+            <label for="password" class="form-label">Mot de passe *</label>
+            <input name="password" type="password" class="form-control" id="password" required>
+        </div>
+        <div class="mb-3">
             <label for="title" class="form-label">Titre de l'article *</label>
             <input name="title" type="text" class="form-control" id="title" required>
         </div>

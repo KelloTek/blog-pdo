@@ -27,7 +27,7 @@ include_once "../components/header.php";
         <img src="<?= $article["image"]; ?>" class="card-img-top" alt="Image de l'article <?= $article["title"]; ?>">
         <div class="card-body">
             <p class="card-text"><?= $article["content"]; ?></p>
-            <p class="card-text"><small class="text-body-secondary">Crée le <?= $article["created_at"]; ?></small></p>
+            <p class="card-text"><small class="text-body-secondary">Crée le <?= $article["created_at"]; ?> par <?= $article["username"]; ?></small></p>
         </div>
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasArticle" aria-controls="offcanvasExample">
             Modifier l'article
@@ -40,6 +40,18 @@ include_once "../components/header.php";
         </div>
         <div class="offcanvas-body">
             <form action="/actions/edit-article.php?id=<?= $_GET['id']; ?>" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nom d'utilisateur *</label>
+                    <input name="username" type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Addresse Email *</label>
+                    <input name="email" type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-5">
+                    <label for="password" class="form-label">Mot de passe *</label>
+                    <input name="password" type="password" class="form-control" id="password" required>
+                </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Titre de l'article *</label>
                     <input name="title" type="text" class="form-control" id="title" value="<?= $article["title"]; ?>" required>
@@ -93,6 +105,14 @@ include_once "../components/header.php";
                 <div class="mb-3">
                     <label for="username" class="form-label">Nom d'utilisateur *</label>
                     <input name="username" type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Addresse Email *</label>
+                    <input name="email" type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-5">
+                    <label for="password" class="form-label">Mot de passe *</label>
+                    <input name="password" type="password" class="form-control" id="password" required>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Contenu du commentaire *</label>

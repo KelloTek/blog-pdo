@@ -25,7 +25,7 @@ function getArticle($id)
 {
     global $pdo;
 
-    $sql = "SELECT a.*, c.title as category_title FROM articles a JOIN categories c ON a.category_id = c.id WHERE a.id = :id;";
+    $sql = "SELECT a.*, c.title as category_title, u.name as username FROM articles a JOIN categories c ON a.category_id = c.id JOIN users u ON a.user_id = u.id WHERE a.id = :id;";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
@@ -83,13 +83,13 @@ function getCategories()
     return $results;
 }
 
-function createArticle($title, $content, $image, $category): bool
+function createArticle($title, $content, $image, $category, $username): bool
 {
     global $pdo;
 
     $pdo->beginTransaction();
 
-    $sql = "INSERT INTO articles (title, content, image, category_id) VALUES (:title, :content, :image, :category);";
+    $sql = "INSERT INTO articles (title, content, image, category_id, user_id) VALUES (:title, :content, :image, :category, :user);";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
@@ -97,18 +97,19 @@ function createArticle($title, $content, $image, $category): bool
         ":content" => $content,
         ":image" => $image,
         ":category" => $category,
+        ":user" => $username,
     ]);
 
     return $pdo->commit();
 }
 
-function editArticle($id, $title, $content, $image, $category): bool
+function editArticle($id, $title, $content, $image, $category, $user): bool
 {
     global $pdo;
 
     $pdo->beginTransaction();
 
-    $sql = "UPDATE articles SET title = :title, content = :content, image = :image, category_id = :category WHERE id = :id;";
+    $sql = "UPDATE articles SET title = :title, content = :content, image = :image, category_id = :category, user_id = :user WHERE id = :id;";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
@@ -117,6 +118,7 @@ function editArticle($id, $title, $content, $image, $category): bool
         ":content" => $content,
         ":image" => $image,
         ":category" => $category,
+        ":user" => $user,
     ]);
 
     return $pdo->commit();
